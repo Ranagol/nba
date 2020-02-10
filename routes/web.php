@@ -23,3 +23,7 @@ Route::get('/teams/{team}', 'TeamController@show');
 
 Route::get('/players/{player}', 'PlayerController@show');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
