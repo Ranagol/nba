@@ -14,5 +14,9 @@
   @endforeach
 </ul>
 
+<h4>Comments</h4>
+  @foreach($team->comments as $comment)
+    <li>Komentator:<strong>{{ $comment->user->name}}</strong>  : {{ $comment->content }}</li>
+  @endforeach
 
-@endsection
+  @endsection
