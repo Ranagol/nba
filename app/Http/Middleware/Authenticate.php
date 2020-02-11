@@ -15,7 +15,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return redirect('/');
+            return route('login');//Header may not contain more than a single header, new line detected---we will get this warning with return redirect('/');
         }
     }
 }

@@ -27,3 +27,5 @@ Route::get('/players/{player}', 'PlayerController@show');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
