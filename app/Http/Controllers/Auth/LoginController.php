@@ -37,4 +37,23 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login(){
+        
+        if (!auth()->attempt(//pokusaj autentikaciju sa podacima iz requesta sto je poslato iz forme
+            request(['email', 'password'])
+        )) {// i ako imamo ne-poklapanje sa podacima iz db, vracaj gresku
+            return back()->withErrors([
+                'message' => 'Bad credentials. Please try again.'
+            ]);
+        }
+        return redirect('/');//...a ako nema greske i autentikacija je uspesna salji usera na /
+
+    }
+
+    public function logout(){
+        auth()->logout();//ovo su built in funkcije, 
+        return redirect('/login');
+    }
+
 }

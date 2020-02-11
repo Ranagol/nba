@@ -52,7 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],//For example, if the field under validation is password, a matching password_confirmation field must be present in the input.
         ]);
     }
 
@@ -69,5 +69,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function store(){
+        $this->validator(request());
+        $user = $this->create(request());
+        $user->save();
+        auth()->login($user);
+        return redirect('/');
     }
 }
