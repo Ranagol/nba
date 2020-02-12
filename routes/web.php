@@ -28,5 +28,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/teams/{team}/comment', 'CommentController@store');
+Route::post('/teams/{team}/comment', 'CommentController@store')->middleware('speechFilter');
 
