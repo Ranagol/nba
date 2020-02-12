@@ -14,9 +14,23 @@
   @endforeach
 </ul>
 
-<h4>Comments</h4>
+<div>
+  <h4>Create a new comment</h4>
+  <form action="/teams/{{$team->id }}/comment" method="POST" >
+    @csrf
+    <input class="form-control" type="text" name="content" placeholder="Write your comment here">
+    <button type="submit" class="btn btn-success" >Submit</button>
+  </form>
+</div>
+<hr>
+<br>
+
+
+<div>
+  <h4>Comments</h4>
   @foreach($team->comments as $comment)
     <li>Komentator:<strong>{{ $comment->user->name}}</strong>  : {{ $comment->content }}</li>
   @endforeach
+</div>
 
-  @endsection
+@endsection

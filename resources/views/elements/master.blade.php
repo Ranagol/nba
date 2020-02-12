@@ -15,11 +15,11 @@
           <a class="nav-item nav-link" href="/register">Register</a>
           <a class="nav-item nav-link" href="/login">Login</a>
           <a class="nav-item nav-link" href="/">Teams</a>
-          <a class="nav-item nav-link" href="/posts">Create new team</a>
+          
           
             @if(Auth::check())<!--ako user postoji i autentikovan je -->
-              <div class="nav-item nav-link">{{ auth()->user()->name}}</div><!--prikazi njegovo ime i logout link -->
-              <a class="nav-item nav-link" href="/logout">Logout</a>
+              <div class="nav-item nav-link"><strong>{{ auth()->user()->name}}</strong></div><!--prikazi njegovo ime i logout link -->
+              
               <form action="/logout" method="POST">
                 @csrf
                 <button class="btn btn-danger" type="submit" >Logout</button>
