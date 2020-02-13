@@ -30,3 +30,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/teams/{team}/comment', 'CommentController@store')->middleware('speechFilter');
 
+Route::get('/news', 'NewController@index');
+

@@ -15,6 +15,7 @@
           <a class="nav-item nav-link" href="/register">Register</a>
           <a class="nav-item nav-link" href="/login">Login</a>
           <a class="nav-item nav-link" href="/">Teams</a>
+          <a class="nav-item nav-link" href="/news">News</a>
           
           
             @if(Auth::check())<!--ako user postoji i autentikovan je -->
