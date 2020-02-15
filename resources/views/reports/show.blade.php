@@ -3,7 +3,7 @@
 @section('content')
 
 <h4>Report title: {{ $report->title }}</h4>
-<p>Author: </p>
+<p>Author: {{ $report->user->name }}</p>
 <p>Content: {{ $report->content }}</p>
 
 

@@ -48,6 +48,7 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
+        $report->load('user');
         return view('reports.show', compact('report'));
     }
 
