@@ -16,19 +16,24 @@ Route::get('/welcome', function () {
 });
 
 
+// https://laravel.com/docs/6.x/middleware#middleware-groups
+//verify middleware stiti sve ove route, a ne stiti welcome page i Auth::routes();
+Route::middleware(['verified'])->group(function () {
+    Route::get('/', 'TeamController@index');
 
-Route::get('/', 'TeamController@index');
+    Route::get('/teams/{team}', 'TeamController@show');
 
-Route::get('/teams/{team}', 'TeamController@show');
+    Route::get('/players/{player}', 'PlayerController@show');
 
-Route::get('/players/{player}', 'PlayerController@show');
+    Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::post('/teams/{team}/comment', 'CommentController@store')->middleware('speechFilter');
 
-Auth::routes();
+    Route::get('/news', 'NewController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/reports', 'ReportController@index');
 
-Route::post('/teams/{team}/comment', 'CommentController@store')->middleware('speechFilter');
+    Route::get('/reports/{report}', 'ReportController@show');
+});
 
-Route::get('/news', 'NewController@index');
-
+Auth::routes(['verify' => true]);

@@ -19,7 +19,7 @@ class CommentController extends Controller
         $comment->save();
         $team = Team::find($teamId);
         $mojMail = new CommentReceived();
-        Mail::to($team)->send(new CommentReceived());
+        Mail::to($team)->send(new CommentReceived());//this is the mail sending part
         return redirect('/teams/' . $teamId);//ovako se vracamo na datu show stranu
     }
 
