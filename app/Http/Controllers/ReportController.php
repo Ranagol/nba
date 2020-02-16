@@ -22,8 +22,11 @@ class ReportController extends Controller
 
     public function indexForSelectedTeam($teamName){
         //{{dd($teamName);}}
-        $team = Team::where('name', $teamName)->with('reports')->first();
-        return view('reports.reportsByTeam', compact('team'));
+        $team = Team::where('name', $teamName)->first();
+
+        $reports = $team->reports()->with('user', 'teams')->paginate(5);
+
+        return view('reports.reportsByTeam', compact('team', 'reports'));
     }
 
     /**
@@ -48,6 +51,8 @@ class ReportController extends Controller
         $this->validate($request, [
             'title' => 'required|min:5',
             'content' => 'required|min:10',
+            'arrayForTeamIds' => 'required|array',
+            'arrayForTeamIds.*' => 'string'
         ]);
 
         $report = new Report;
