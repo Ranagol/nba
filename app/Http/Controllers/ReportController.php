@@ -16,7 +16,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::with('user', 'teams')->paginate(5);
+        $reports = Report::with('user', 'teams')->orderBy('created_at', 'desc')->paginate(5);
         return view('reports.index', compact('reports'));
     }
 
@@ -45,7 +45,25 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:5',
+            'content' => 'required|min:10',
+        ]);
+
+        $report = new Report;
+        $report->title = $request->title;
+        $report->content = $request->content;
+        $report->user_id = auth()->id();//get the user_id from the auth helper
+        //{{ dd($request, $report);}}
+
+        $teams = Team::whereIn('id', $request->arrayForTeamIds)->get();//sooooo... The whereIn() function is different from where(). where() receives one value to search, while whereIn() receives multiple values to search for in the db, in an array. We are saying to Laravel: please please give me all the teams with the id matching with id's from arrayForTeamIds[]. These teams will be stored in this $teams array.
+
+        foreach ($teams as $team) {//ovde loop-ujemo preko $teams
+
+            $team->reports()->save($report);//za svaki navedeni team dodaj gorekreirani $report. reports() je relationship metoda izmedju Team i Report. Ovako cemo popuniti i nas report_team pivot table sa odgovarajucim vrednostima na odgovarajucim mestima.
+        }
+        session()->flash('message', 'Thank you for publishing article on www.nba.com');
+        return redirect('/reports');
     }
 
     /**

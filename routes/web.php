@@ -36,6 +36,8 @@ Route::middleware(['verified'])->group(function () {
 
     Route::get('/reports/create', 'ReportController@create');
 
+    Route::post('/reports/create', 'ReportController@store');
+
     Route::get('/reports/{report}', 'ReportController@show');
 
     Route::get('/reports/team/{teamName}', 'ReportController@indexForSelectedTeam');

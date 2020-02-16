@@ -2,6 +2,12 @@
 @section('title')
 @section('content')
 
+<!--session-->
+@if($flash = session('message'))
+  {{ $flash }}
+@endif
+
+
 <h4>Reports</h4>
 <div>
   @foreach($reports as $report)
