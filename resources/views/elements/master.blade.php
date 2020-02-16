@@ -9,37 +9,24 @@
 </head>
 <body>
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="/welcome">Welcome</a>
-          <a class="nav-item nav-link" href="/register">Register</a>
-          <a class="nav-item nav-link" href="/login">Login</a>
-          <a class="nav-item nav-link" href="/">Teams</a>
-          <a class="nav-item nav-link" href="/reports">Reports</a>
-          
-          
-            @if(Auth::check())<!--ako user postoji i autentikovan je -->
-              <div class="nav-item nav-link"><strong>{{ auth()->user()->name}}</strong></div><!--prikazi njegovo ime i logout link -->
-              
-              <form action="/logout" method="POST">
-                @csrf
-                <button class="btn btn-danger" type="submit" >Logout</button>
-              </form>
-            @endif
-          
-        </div>
-    </nav>
 
+    <div>
+      @include('elements.navbar')
+    </div>
 
+    <div class="d-flex flex-row">
 
-    @yield('content')
+      <main class="col-9 card" id="main">
+        @yield('content')
+      </main>
+  
+      <aside class="col-3 card" id="sidebar">
+        @include('elements.sidebar')
+      </aside>
 
-
-
+    </div>
+    
   </div>
 
-
-  
-  
 </body>
 </html>

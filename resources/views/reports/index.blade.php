@@ -12,6 +12,7 @@
         <a href="/reports/team/{{ $team->name }}">{{ $team->name}}</a>
       @endforeach
     </p>
+    <p>Report date: {{ $report->created_at }}</p>
     <hr>
   @endforeach
 </div>

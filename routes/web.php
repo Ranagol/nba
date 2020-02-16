@@ -16,6 +16,7 @@ Route::get('/welcome', function () {
 });
 
 
+
 // https://laravel.com/docs/6.x/middleware#middleware-groups
 //verify middleware stiti sve ove route, a ne stiti welcome page i Auth::routes();
 Route::middleware(['verified'])->group(function () {
@@ -33,9 +34,14 @@ Route::middleware(['verified'])->group(function () {
 
     Route::get('/reports', 'ReportController@index');
 
+    Route::get('/reports/create', 'ReportController@create');
+
     Route::get('/reports/{report}', 'ReportController@show');
 
     Route::get('/reports/team/{teamName}', 'ReportController@indexForSelectedTeam');
+
+    
 });
 
 Auth::routes(['verify' => true]);
+

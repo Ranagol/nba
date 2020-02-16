@@ -33,7 +33,8 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+        $teams = Team::all();
+        return view('reports.create', compact('teams'));
     }
 
     /**
