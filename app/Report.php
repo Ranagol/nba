@@ -8,8 +8,8 @@ class Report extends Model
 {
     protected $guarded = ['id'];
 
-    public function team(){
-        return $this->belongsTo(Team::class);
+    public function teams(){
+        return $this->belongsToMany(Team::class);
     }
 
     public function user(){

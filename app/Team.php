@@ -17,7 +17,7 @@ class Team extends Model
     }
 
     public function reports(){
-        return $this->hasMany(Report::class);
+        return $this->belongsToMany(Report::class);
     }
 
 }

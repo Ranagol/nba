@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Report;
 use App\User;
+use App\Team;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -15,8 +16,14 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::with('user')->paginate(5);
+        $reports = Report::with('user', 'teams')->paginate(5);
         return view('reports.index', compact('reports'));
+    }
+
+    public function indexForSelectedTeam($teamName){
+        //{{dd($teamName);}}
+        $team = Team::where('name', $teamName)->with('reports')->first();
+        return view('reports.reportsByTeam', compact('team'));
     }
 
     /**
@@ -49,6 +56,7 @@ class ReportController extends Controller
     public function show(Report $report)
     {
         $report->load('user');
+        $report->load('teams');
         return view('reports.show', compact('report'));
     }
 

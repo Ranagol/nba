@@ -34,6 +34,8 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/reports', 'ReportController@index');
 
     Route::get('/reports/{report}', 'ReportController@show');
+
+    Route::get('/reports/team/{teamName}', 'ReportController@indexForSelectedTeam');
 });
 
 Auth::routes(['verify' => true]);
